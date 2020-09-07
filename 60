@@ -1,0 +1,48 @@
+import math
+#60.1
+numbers = open("liczby.txt")
+lower1000 = []
+i = 0
+numbersList = numbers.read().split()
+for number in numbersList:
+    numbersList[i] = int(numbersList[i])
+    i = i + 1
+for number in numbersList:
+    if number <= 1000:
+        lower1000.append(number)
+lower1000.reverse()
+print(lower1000[0], lower1000[1])
+
+#60.2
+dividers = 0
+dividersList = []
+for number in numbersList:
+    for i in range(number):
+        if number % (i + 1) == 0:
+            dividers = dividers + 1
+            dividersList.append(i + 1)
+    if dividers == 18:
+        print(number, ";", dividersList)
+    dividers = 0
+    dividersList = []
+
+#60.3
+primeNumbersList = []
+isPrime = 1
+for number in numbersList:
+    for number2 in numbersList:
+        if number != number2:
+            if math.gcd(number, number2) != 1:
+                isPrime = 0
+                break
+    if isPrime == 1:
+        primeNumbersList.append(number)
+    else:
+        isPrime = 1
+
+maximum = max(primeNumbersList)
+
+print(maximum)
+
+
+
