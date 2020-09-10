@@ -1,0 +1,92 @@
+import math
+
+# 4.1
+print("4.1")
+numbersFile = open("liczby.txt")
+numbersData = numbersFile.read().split()
+numbers = []
+numbersInt = []
+for data in numbersData:
+    numbers.append(float(data))
+for data in numbersData:
+    numbersInt.append(int(data))
+
+
+answer = 0
+
+
+def dividing(a):
+    global answer
+    if a / 3 == 1:
+        answer = answer + 1
+        return
+    elif a == 1:
+        answer = answer + 1
+        return
+    if a < 1:
+        return
+    else:
+        a = a / 3
+        dividing(a)
+
+
+for number in numbers:
+    dividing(number)
+
+print(answer)
+
+# 4.2
+
+print("4.2")
+
+answer = 0
+answerList = []
+stringNumbers = []
+
+for number in numbersInt:
+    stringNumbers.append(str(number))
+
+
+for number in stringNumbers:
+    for i in range(len(number)):
+        answer = answer + math.factorial(int(number[i]))
+    if int(number) == answer:
+        answerList.append(number)
+    answer = 0
+
+print(answerList)
+
+# 4.3
+
+print("4.3")
+
+maxGdcList = []
+tempGdcList = []
+tempFirst = 0
+maxFirst = 0
+maxGdc = 0
+tempGdc = []
+
+
+for i in range(len(numbersInt) - 1):
+    if len(tempGdcList) == 0:
+        tempGdcList.append(numbersInt[i])
+        tempFirst = numbersInt[i]
+    if math.gcd(numbersInt[i], numbersInt[i + 1]) > 1:
+        tempGdcList.append(numbersInt[i + 1])
+        tempGdc.append(math.gcd(numbersInt[i], numbersInt[i + 1]))
+    else:
+        if len(tempGdcList) > len(maxGdcList):
+            maxGdcList = tempGdcList
+            maxFirst = tempFirst
+            if len(tempGdc) != 0:
+                maxGdc = min(tempGdc)
+            tempGdcList = []
+            tempFirst = 0
+            tempGdc = []
+
+print(maxFirst, len(maxGdcList), maxGdc)
+
+
+
+
